@@ -1,35 +1,26 @@
 
-document.getElementById("generate_btn").addEventListener("click", sample_func);
+document.getElementById("generate_btn").addEventListener("click", generateKeyHandler);
 
-function sample_func()
-{
-
-
+function generateKeyHandler() {
   chrome.runtime.sendMessage({
-      name: 'popup',
-      msg: 'from popup to background'
+      name: 'generateKeyRequest',
+      params: {}
   });
-
-
-
+}
 
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
-
   if (!request.name) {
      console.log("Unvalid params.");
      return;
   }
   switch (request.name) {
     case 'background':
-      console.log(request.msg);
+      console.log(request.params);
       break;
-
-
   }
-          }
-      );
-    }
+});
+
 /*
 var xhr = new XMLHttpRequest();
 

@@ -12,20 +12,21 @@ chrome.runtime.onMessage.addListener(
          return;
       }
       switch (request.name) {
-        case 'popup':
+        case 'generateKeyRequest':
+        console.log("Start send key request from background to content.");
         chrome.tabs.query(
           { active: true },
           (tabs) => {
           chrome.tabs.sendMessage(
             tabs[0].id,
               {
-                 name: 'background',
-                 msg: request.msg + ' ' + 'and background to content'
+                 name: 'generateKeyRequest',
+                 params: request.params
                }
             );
           }
         );
-          break;
+       break;
             //(response) => {
              //console.log("Get response from content script. " + JSON.stringify(response));
 
