@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>
+Step 5: Dataset Match.
+</h1>
+<div>
+<label>Target Task ID: </label>
+<input value={this.state.targetTaskID} onChange = {this.onTargetIDChanged} />
+<button onClick = {this.startDataMatch}>Start Data Match</button>
+<div>Data Match Status: {this.state.dataMatchStatus}</div>
+<div> You can download encrypt data match result from
+   <a href={"./api/files/downloadDataMatch" + this.state.dataSetQueryString}>Data Match Result</a>
+</div>
+<div>
+   <br/>
+   Decrypting Data Match Result
+   <button onClick = {this.startDecryptedDataMatch}>Start</button>
+   <div>Decrypting Status: {this.state.decryptedDataMatchStatus}</div>
+   Down Decrypted Data from
+   <a href={"./api/files/downloadDataMatch" + this.state.decryptedDataSetQueryString}>Result</a>
+</div>
+</div>
+</div>);
+}
+};
+
+</body>
+</html>
