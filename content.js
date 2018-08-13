@@ -9,5 +9,19 @@ chrome.runtime.onMessage.addListener(
       name: 'content',
       msg: request.msg + ' ' + 'and content to background'
     });
+    window.postMessage({
+      name: 'content',
+      msg: request.msg + ' ' + 'and content to webpage'
+      }, "*");
+  }
+);
 
-  });
+  window.addEventListener("message", function(event) {
+
+    if (event.source != window)
+      return;
+
+    if (event.data.type && (event.data.type == "FROM_PAGE")) {
+      console.log("Content script received: " + event.data.text);
+    }
+  }, false);
