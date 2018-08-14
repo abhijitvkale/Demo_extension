@@ -27,8 +27,22 @@ chrome.runtime.onMessage.addListener(
           }
         );
        break;
-            //(response) => {
-             //console.log("Get response from content script. " + JSON.stringify(response));
+       case 'attestationRequest':
+       console.log("Start attestation request from background to content.");
+       chrome.tabs.query(
+         { active: true },
+         (tabs) => {
+         chrome.tabs.sendMessage(
+           tabs[0].id,
+             {
+                name: 'attestationRequest',
+                params: request.params
+              }
+           );
+         }
+       );
+      break;
+
       case 'generateKeyResponse':
         console.log('Rev generateKeyResponse from content.');
         chrome.runtime.sendMessage({
@@ -38,6 +52,14 @@ chrome.runtime.onMessage.addListener(
               });
         break;
 
+        case 'attestationResponse':
+          console.log('Rev attestationResponse from content.');
+          chrome.runtime.sendMessage({
+                  from: 'background',
+                  name: 'attestationResponse',
+                  params: request.params
+                });
+          break;
         case 'content':
           console.log("message recieved from content");
           chrome.runtime.sendMessage({

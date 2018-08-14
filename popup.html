@@ -10,14 +10,13 @@
             <textarea id = "pubkey_txt"> </textarea>
             <div>Private Key:</div>
             <textarea id = "privkey_txt"> </textarea>
-            <div>
-               <button disabled={this.state.downloadPrivateDisable} onClick = {this.downloadPrivateKey}>Download Private Key</button>
-               <button disabled={this.state.downloadPublicDisable} onClick = {this.downloadPublicKey}>Download Public Key</button>
-            </div>
+
             <p></p>
-            <div>
-               <font size="3"><a href="/start_attestation.html">Step 2: Node Connection and Attestation.</a></font>
-             </div>
-<script src="popup.js"></script>
+
+            <div>Sart Attestation</div>
+            <textarea id = "attestation_txt"> </textarea>
+            <button id = "attestation_btn"> Start Attestation </button><br/>
+
+            <script src="popup.js"></script>
 </body>
 </html>

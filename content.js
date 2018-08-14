@@ -21,11 +21,20 @@ chrome.runtime.onMessage.addListener(
         params: request.params
       }, "*");
       break;
+
+      case 'attestationRequest':
+      console.log('Start attestation request to web page.');
+      window.postMessage({
+        name: 'attestationRequest',
+        params: request.params
+      }, "*");
+      break;
       default:
       console.log("Content JS: Unhandled request " + JSON.stringify(request));
     }
   }
 );
+
 
   window.addEventListener("message", function(event) {
 
@@ -46,5 +55,13 @@ chrome.runtime.onMessage.addListener(
           params: event.data.params
         });
         break;
+        case 'attestationResponse':
+          console.log('Rev attestationResponse params ' + JSON.stringify(event.data.params));
+          chrome.runtime.sendMessage({
+            from: 'content',
+            name: 'attestationResponse',
+            params: event.data.params
+          });
+          break;
     }
   }, false);

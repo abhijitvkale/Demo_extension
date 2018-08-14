@@ -1,5 +1,6 @@
 
 document.getElementById("generate_btn").addEventListener("click", generateKeyHandler);
+document.getElementById("attestation_btn").addEventListener("click", attestationHandler);
 
 function generateKeyHandler() {
   chrome.runtime.sendMessage({
@@ -7,7 +8,13 @@ function generateKeyHandler() {
       params: {}
   });
 }
+function attestationHandler() {
 
+  chrome.runtime.sendMessage({
+      name: 'attestationRequest',
+      params: {}
+  });
+}
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
   console.log("for pop up " + JSON.stringify(request));
@@ -22,6 +29,11 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
       document.getElementById('pubkey_txt').innerText = request.params.public;
       document.getElementById('privkey_txt').innerText = request.params.private;
       break;
+
+      case 'attestationResponse':
+        console.log('Rev attestationResponse with ' + JSON.stringify(request.params));
+        document.getElementById('attestation_txt').innerText = request.params.result;
+        break;
 
     case 'background':
       console.log(request.params);
