@@ -32,7 +32,19 @@ chrome.runtime.onMessage.addListener(
     if (event.source != window)
       return;
 
-    if (event.data.type && (event.data.type == "FROM_PAGE")) {
-      console.log("Content script received: " + event.data.text);
+    if (!event.data.name) {
+      console.log("Invalid message for content page.");
+      return;
+    }
+
+    switch (event.data.name){
+      case 'generateKeyResponse':
+        console.log('Rev generateKeyResponse params ' + JSON.stringify(event.data.params));
+        chrome.runtime.sendMessage({
+          from: 'content',
+          name: 'generateKeyResponse',
+          params: event.data.params
+        });
+        break;
     }
   }, false);

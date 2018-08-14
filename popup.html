@@ -7,9 +7,9 @@
             </h1>
             <button id = "generate_btn"> Generate </button><br/>
             <div>Public Key:</div>
-            <textarea id = "pubkey_txt" value={this.state.publicKey} style={{height: 100, width: 600}}> </textarea>
+            <textarea id = "pubkey_txt"> </textarea>
             <div>Private Key:</div>
-            <textarea id = "privkey_txt" value={this.state.privateKey} style={{height: 100, width: 600}}> </textarea>
+            <textarea id = "privkey_txt"> </textarea>
             <div>
                <button disabled={this.state.downloadPrivateDisable} onClick = {this.downloadPrivateKey}>Download Private Key</button>
                <button disabled={this.state.downloadPublicDisable} onClick = {this.downloadPublicKey}>Download Public Key</button>

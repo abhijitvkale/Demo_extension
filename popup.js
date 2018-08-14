@@ -10,11 +10,19 @@ function generateKeyHandler() {
 
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
-  if (!request.name) {
+  console.log("for pop up " + JSON.stringify(request));
+  if (!request.name || request.from != 'background') {
      console.log("Unvalid params.");
      return;
   }
+
   switch (request.name) {
+    case 'generateKeyResponse':
+      console.log('Rev generateKeyResponse with ' + JSON.stringify(request.params));
+      document.getElementById('pubkey_txt').innerText = request.params.public;
+      document.getElementById('privkey_txt').innerText = request.params.private;
+      break;
+
     case 'background':
       console.log(request.params);
       break;

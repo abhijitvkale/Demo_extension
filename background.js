@@ -29,6 +29,14 @@ chrome.runtime.onMessage.addListener(
        break;
             //(response) => {
              //console.log("Get response from content script. " + JSON.stringify(response));
+      case 'generateKeyResponse':
+        console.log('Rev generateKeyResponse from content.');
+        chrome.runtime.sendMessage({
+                from: 'background',
+                name: 'generateKeyResponse',
+                params: request.params
+              });
+        break;
 
         case 'content':
           console.log("message recieved from content");
